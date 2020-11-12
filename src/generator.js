@@ -208,13 +208,13 @@ events.push(class ${event}Event extends BaseEvent {
         super('${event}');
     }
 
-    run(...args) {
+    async run(...args) {
         //Your event code here...
     }
 
 })`;
     }
-    code += '\nexports.events = events;'
+    code += '\nexports.events = events;';
 
     await new Listr([
         {

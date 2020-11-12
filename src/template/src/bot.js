@@ -29,10 +29,10 @@ client.on('message', async (msg) => {
         if (command == msg.content.split(' ')[0].slice(1)) {
             let cmd = commands[command];
             if (typeof cmd == 'string') {
-                commands[cmd].run(msg, args, db);
+                await commands[cmd].run(msg, args, db);
                 return;
             } else {
-                commands[command].run(msg, args, db);
+                await commands[command].run(msg, args, db);
                 return;
             }
         }
