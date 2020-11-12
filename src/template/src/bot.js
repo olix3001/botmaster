@@ -23,10 +23,11 @@ registerEvents(__dirname + '/events', client);
 client.on('message', async (msg) => {
     if (db.get(`${msg.guild.id}/prefix`) == null) await CreateDb(msg.guild.id);
     if (msg.author.bot) return;
-    if (!msg.content.startsWith(db.get(`${msg.guild.id}/prefix`))) return;
+    prefix = db.get(`${msg.guild.id}/prefix`);
+    if (!msg.content.startsWith(prefix)) return;
     let args = msg.content.split(' ').slice(1);
     for (let command of Object.keys(commands)) {
-        if (command == msg.content.split(' ')[0].slice(1)) {
+        if (command == msg.content.split(' ')[0].slice(prefix.length)) {
             let cmd = commands[command];
             if (typeof cmd == 'string') {
                 await commands[cmd].run(msg, args, db);
