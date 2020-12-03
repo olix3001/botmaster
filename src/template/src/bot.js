@@ -21,9 +21,11 @@ const commands = registerCommands(__dirname + '/commands');
 registerEvents(__dirname + '/events', client);
 
 client.on('message', async (msg) => {
-    if (db.get(`${msg.guild.id}/prefix`) == null) await CreateDb(msg.guild.id);
+    if (msg.guild == null) return;
+    let guildId = msg.guild.id;
+    if ((await db.get(`${guildId}/prefix`)) == null) await CreateDb(guildId);
     if (msg.author.bot) return;
-    prefix = db.get(`${msg.guild.id}/prefix`);
+    prefix = await db.get(`${guildId}/prefix`);
     if (!msg.content.startsWith(prefix)) return;
     let args = msg.content.split(' ').slice(1);
     for (let command of Object.keys(commands)) {
@@ -39,5 +41,6 @@ client.on('message', async (msg) => {
         }
     }
 });
+module.exports.db = db;
 
 client.login(process.env.TOKEN);

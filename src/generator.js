@@ -208,7 +208,7 @@ events.push(class ${event}Event extends BaseEvent {
         super('${event}');
     }
 
-    async run(...args) {
+    async run(args) {
         //Your event code here...
     }
 

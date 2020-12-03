@@ -43,7 +43,7 @@ exports.registerEvents = (dir, client) => {
             let eventInstance = new event();
             console.log(`registering event ${chalk.yellow.bold(eventInstance.name.toUpperCase())}`);
             client.on(eventInstance.name, async (...args) => {
-                await eventInstance.run(...args);
+                await eventInstance.run(args);
             });
         }
     }
