@@ -1,3 +1,4 @@
+## this is the tool for creating discord bots
 # installation
 ```
 npm install https://github.com/olix3001yt/botmaster -g
